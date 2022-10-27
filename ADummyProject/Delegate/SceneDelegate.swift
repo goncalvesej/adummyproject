@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  ADummyProject
 //
-//  Created by Eraldo Jr. on 02/10/22.
+//  Created by Eraldo Jr. on 25/10/22.
 //
 
 import UIKit
@@ -18,8 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
         
-        let viewController = HomeViewController(Service())
+        let viewController = HomeViewController(Service.shared)
         let navigationController = UINavigationController(rootViewController: viewController)
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = scene
         window?.rootViewController = navigationController

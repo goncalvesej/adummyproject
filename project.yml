@@ -1,0 +1,83 @@
+name: ADummyProject
+options:
+  postGenCommand: pod install
+  deploymentTarget:
+    iOS: 13.0
+  # bundleIdPrefix: com.goncalvesej.adummyproject
+# packages:
+#   BitriseSwift:
+#     url: https://github.com/noppefoxwolf/Bitrise-Swift
+#     from: 0.0.5
+
+attributes:
+  ORGANIZATIONNAME: goncalvesej
+    
+configs:
+  debug: debug
+  test: debug
+  release: release
+
+settings:
+  configs:
+    test:
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG TEST
+
+targets:
+  ADummyProject:
+    platform: iOS
+    type: application
+    deploymentTarget: "13.0"
+    sources:
+      - ADummyProject
+    # dependencies:
+    #   - package: BitriseSwift
+    # scheme:
+    #   environmentVariables:
+    #     ENABLE_SIGNPOST: YES
+    settings:
+      base:
+        INFOPLIST_FILE: ADummyProject/Info.plist
+        ENABLE_BITCODE: NO
+        PRODUCT_BUNDLE_IDENTIFIER: com.goncalvesej.$(PRODUCT_NAME).App
+        SDKROOT: iphoneos
+        SWIFT_VERSION: 5.7
+        IPHONEOS_DEPLOYMENT_TARGET: 13.0
+        TARGETED_DEVICE_FAMILY: "1"
+        PRODUCT_NAME: ADummyProject
+        CODE_SIGN_STYLE: Manual
+        CODE_SIGN_IDENTITY: iPhone Developer
+        CODE_SIGN_IDENTITY [sdk=iphoneos*]: iPhone Developer
+        # OTHER_CODE_SIGN_FLAGS: -generate-entitlement-der
+        # DEVELOPMENT_TEAM: 3TS7T7V375
+        # DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+        # PROVISIONING_PROFILE:
+
+
+  ADummyProjectTests:
+    platform: iOS
+    type: bundle.unit-test
+    deploymentTarget: "13.0"
+    sources:
+      - ADummyProjectTests
+    dependencies:
+      - target: ADummyProject
+    settings:
+      base:
+        PRODUCT_NAME: ADummyProjectTests
+    info:
+      path: ADummyProjectTests/Info.plist
+  
+schemes:
+  ADummyProject:
+    build:
+      targets:
+        ADummyProject: all
+        ADummyProjectTests: [test]
+    test:
+      config: test
+      gatherCoverageData: true
+      coverageTargets:
+        - ADummyProject
+      targets:
+        - name: ADummyProjectTests
+          parallelizable: true

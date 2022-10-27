@@ -2,17 +2,24 @@
 //  HomeView.swift
 //  ADummyProject
 //
-//  Created by Eraldo Jr. on 02/10/22.
+//  Created by Eraldo Jr. on 25/10/22.
 //
 
 import UIKit
+
+internal protocol HomeViewDelegate: AnyObject {
+    
+    func didSelectRow(_ indexPath: IndexPath)
+    
+}
 
 internal final class HomeView: UIView {
     
     internal var container: UIView
     internal var tableView: UITableView
+    internal weak var theDelegate: HomeViewDelegate?
     
-    private var dataSource: DataSource
+    private var tableDataSource: DataSource
     
     internal var viewModel: HomeViewModelProtocol? {
         didSet {
@@ -22,10 +29,13 @@ internal final class HomeView: UIView {
     
     internal override init (frame: CGRect) {
         container = UIView()
-        dataSource = DataSource()
+        tableDataSource = DataSource()
         tableView = UITableView()
+        tableView.dataSource = tableDataSource
+        tableView.register(UserTableViewCell.self, forCellReuseIdentifier: String(describing: UserTableViewCell.self))
+
         super.init(frame: frame)
-        setUp()
+        setUpView()
     }
     
     internal required init?(coder: NSCoder) {
@@ -34,7 +44,8 @@ internal final class HomeView: UIView {
     
     private func update() {
         if let viewModel {
-            dataSource.sections = viewModel.sections
+            tableDataSource.sections = viewModel.sections
+            tableView.reloadData()
         }
     }
     
@@ -48,13 +59,13 @@ extension HomeView: ViewCode {
     }
     
     internal func setUpConstraints() {
-    
+        
         container.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             container.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             container.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
             container.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),
-            container.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            container.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -64,15 +75,26 @@ extension HomeView: ViewCode {
             tableView.rightAnchor.constraint(equalTo: container.rightAnchor),
             tableView.bottomAnchor.constraint(equalTo: container.bottomAnchor)
         ])
+
     }
     
     internal func render() {
-        backgroundColor = .black
-        tableView.backgroundColor = .red
+        container.backgroundColor = .black
+        tableView.delegate = self
+        tableView.rowHeight = 80
+        tableView.backgroundColor = .black
     }
     
     internal func setUpAccessibility() {
         
+    }
+    
+}
+
+extension HomeView: UITableViewDelegate {
+    
+    internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        theDelegate?.didSelectRow(indexPath)
     }
     
 }

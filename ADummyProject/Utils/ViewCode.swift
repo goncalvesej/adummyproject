@@ -2,10 +2,10 @@
 //  ViewCode.swift
 //  ADummyProject
 //
-//  Created by Eraldo Jr. on 02/10/22.
+//  Created by Eraldo Jr. on 25/10/22.
 //
 
-import Foundation
+import UIKit
 
 internal protocol ViewCode {
 
@@ -17,8 +17,8 @@ internal protocol ViewCode {
 }
 
 extension ViewCode {
-    
-    func setUp() {
+
+    func setUpView() {
         buildHierarchy()
         setUpConstraints()
         render()

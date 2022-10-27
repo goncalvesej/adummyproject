@@ -2,16 +2,14 @@
 //  HomeViewController.swift
 //  ADummyProject
 //
-//  Created by Eraldo Jr. on 02/10/22.
+//  Created by Eraldo Jr. on 25/10/22.
 //
 
 import UIKit
 
 internal class HomeViewController: UIViewController {
     
-    internal override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
-    }
+    private var users: [DummyUser]?
     
     internal let service: ServiceProtocol
     
@@ -26,27 +24,68 @@ internal class HomeViewController: UIViewController {
     
     internal override func viewDidLoad() {
         super.viewDidLoad()
-        let v = HomeView()
-        view = v
+        let theView = HomeView()
+        theView.theDelegate = self
+        view = theView
         
-        title = "Home Screen"
-        
-//        navigationItem.largeTitleDisplayMode = .always
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .red
-//
-//        // setup title font color
-        let titleAttribute = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 25, weight: .bold),
-            NSAttributedString.Key.foregroundColor: UIColor.white
-        ]
-        appearance.titleTextAttributes = titleAttribute
-        
-//        navigationController?.navigationBar.standardAppearance = appearance
-//        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-//        navigationController?.navigationBar.barStyle = .default
+        setupNavigation(title: "Home Screen")
+        fetchData()
+    }
+    
+    
+    private func fetchData() {
+        service.fetchUsers(completion: { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.users = data
+                if let theView = self?.view as? HomeView {
+                    theView.viewModel = HomeViewModel(data)
+                }
+            case .failure:
+                let alert = UIAlertController(title: "Ouch!", message: "Something went wrong", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Understood", style: .default, handler: { action in
+                    
+                }))
+                self?.present(alert, animated: true, completion: nil)
+            }
+            
+        })
+    }
+    
+    private func setupNavigation(title: String) {
+        self.title = title
+        if let navigationController {
+            navigationController.navigationBar.barStyle = .black
+            navigationController.navigationBar.tintColor = .white
+            
+            let buttonImage = UIImage(systemName: "questionmark.circle.fill")
+            let faqButton = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(openFaq))
+            faqButton.tintColor = .white
+            navigationItem.rightBarButtonItem = faqButton
+            let btn = UIButton()
+            btn.addTarget(self, action: #selector(openFaq), for: .touchUpInside)
+            
+
+        }
+    }
+    
+    @objc private func openFaq() {
+        let alert = UIAlertController(title: "Faq open", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Close", style: .cancel){ _ in })
+        self.present(alert, animated: true)
+    }
+    
+}
+
+extension HomeViewController: HomeViewDelegate {
+    
+    internal func didSelectRow(_ index:  IndexPath) {
+        if let users {
+            let user = users[index.row]
+            let alert = UIAlertController(title: user.name, message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Understood", style: .cancel){ _ in })
+            self.present(alert, animated: true)
+        }
     }
     
 }

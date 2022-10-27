@@ -1,0 +1,21 @@
+xcuserdata/
+*.xcodeproj
+*.xcworkspace
+
+## Obj-C/Swift specific
+*.hmap
+
+## App packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+Packages/
+Package.pins
+Package.resolved
+.swiftpm
+
+# Cocoapods
+.build/
+Pods/
