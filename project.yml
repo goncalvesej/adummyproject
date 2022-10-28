@@ -3,11 +3,11 @@ options:
   postGenCommand: pod install
   deploymentTarget:
     iOS: 13.0
-  # bundleIdPrefix: com.goncalvesej.adummyproject
-# packages:
-#   BitriseSwift:
-#     url: https://github.com/noppefoxwolf/Bitrise-Swift
-#     from: 0.0.5
+
+packages:
+  Coordinator:
+    url: git@github.com:goncalvesej/coordinator.git
+    branch: main
 
 attributes:
   ORGANIZATIONNAME: goncalvesej
@@ -29,11 +29,8 @@ targets:
     deploymentTarget: "13.0"
     sources:
       - ADummyProject
-    # dependencies:
-    #   - package: BitriseSwift
-    # scheme:
-    #   environmentVariables:
-    #     ENABLE_SIGNPOST: YES
+    dependencies:
+      - package: Coordinator
     settings:
       base:
         INFOPLIST_FILE: ADummyProject/Info.plist
@@ -47,11 +44,6 @@ targets:
         CODE_SIGN_STYLE: Manual
         CODE_SIGN_IDENTITY: iPhone Developer
         CODE_SIGN_IDENTITY [sdk=iphoneos*]: iPhone Developer
-        # OTHER_CODE_SIGN_FLAGS: -generate-entitlement-der
-        # DEVELOPMENT_TEAM: 3TS7T7V375
-        # DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
-        # PROVISIONING_PROFILE:
-
 
   ADummyProjectTests:
     platform: iOS

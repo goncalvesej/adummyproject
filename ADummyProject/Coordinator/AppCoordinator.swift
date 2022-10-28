@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Coordinator
 
 internal enum AppCoordinatorEvent: CoordinatorEvent {
 
@@ -14,12 +15,12 @@ internal enum AppCoordinatorEvent: CoordinatorEvent {
 
 }
 
-internal class AppCoordinator: Coordinator {
+internal class AppCoordinator: CoordinatorProtocol {
 
     internal let uuid = String(describing: AppCoordinator.self)
 
-    internal var parentCoordinator: Coordinator?
-    internal var children: [Coordinator] = []
+    internal var parentCoordinator: CoordinatorProtocol?
+    internal var children: [CoordinatorProtocol] = []
     internal var navigationController: UINavigationController
 
     private var service: ServiceProtocol

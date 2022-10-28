@@ -6,15 +6,16 @@
 //
 
 import Foundation
+import Components
 
 internal final class UserTableViewSection: TableViewSectionProtocol {
 
     internal typealias CellViewModel = UserTableViewCellModel
 
     internal var sectionTitle: String
-    internal var cellsViewModels: [UserTableViewCellModel]
+    internal var cellsViewModels: [CellViewModel]
 
-    internal init(sectionTitle: String, cellsViewModels: [UserTableViewCellModel]) {
+    internal init(sectionTitle: String, cellsViewModels: [CellViewModel]) {
         self.sectionTitle = sectionTitle
         self.cellsViewModels = cellsViewModels
     }

@@ -1,3 +1,22 @@
-PODFILE CHECKSUM: a2b51b675326b4d1943c135fa907007c3a38d51c
+PODS:
+  - Components/Debug (1.0.0)
+
+DEPENDENCIES:
+  - "Components/Debug (from `git@github.com:goncalvesej/components.git`, commit `a88ae558333c00be0902bba7ea0c235c7bb7c31b`)"
+
+EXTERNAL SOURCES:
+  Components:
+    :commit: a88ae558333c00be0902bba7ea0c235c7bb7c31b
+    :git: "git@github.com:goncalvesej/components.git"
+
+CHECKOUT OPTIONS:
+  Components:
+    :commit: a88ae558333c00be0902bba7ea0c235c7bb7c31b
+    :git: "git@github.com:goncalvesej/components.git"
+
+SPEC CHECKSUMS:
+  Components: 251f394933f05fc011b6b51669c94fa8f5d758b3
+
+PODFILE CHECKSUM: 6fb3072336644b03d174f08f0164b9dbed7065af
 
 COCOAPODS: 1.11.3

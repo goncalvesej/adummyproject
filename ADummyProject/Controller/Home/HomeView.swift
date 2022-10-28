@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Components
 
 internal protocol HomeViewDelegate: AnyObject {
 
@@ -19,7 +20,7 @@ internal final class HomeView: UIView {
     internal var tableView: UITableView
     internal weak var theDelegate: HomeViewDelegate?
 
-    private var tableDataSource: DataSource
+    private var tableDataSource: UserTableViewDataSource
 
     internal var viewModel: HomeViewModelProtocol? {
         didSet {
@@ -29,7 +30,7 @@ internal final class HomeView: UIView {
 
     internal override init (frame: CGRect) {
         container = UIView()
-        tableDataSource = DataSource()
+        tableDataSource = UserTableViewDataSource()
         tableView = UITableView()
         tableView.dataSource = tableDataSource
         tableView.register(UserTableViewCell.self, forCellReuseIdentifier: String(describing: UserTableViewCell.self))
@@ -51,7 +52,7 @@ internal final class HomeView: UIView {
 
 }
 
-extension HomeView: ViewCode {
+extension HomeView: ViewCoding {
 
     internal func buildHierarchy() {
         container.addSubview(tableView)

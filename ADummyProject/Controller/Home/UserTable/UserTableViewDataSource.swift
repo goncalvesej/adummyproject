@@ -1,22 +1,13 @@
 //
-//  DataSource.swift
+//  UserTableViewDataSource.swift
 //  ADummyProject
 //
-//  Created by Eraldo Jr. on 25/10/22.
+//  Created by Eraldo Jr. on 28/10/22.
 //
 
 import UIKit
 
-internal protocol TableViewSectionProtocol {
-
-    associatedtype CellViewModel
-
-    var sectionTitle: String { get }
-    var cellsViewModels: [CellViewModel] { get }
-
-}
-
-internal class DataSource: NSObject, UITableViewDataSource {
+internal class UserTableViewDataSource: NSObject, UITableViewDataSource {
 
     internal var sections: [UserTableViewSection]
 

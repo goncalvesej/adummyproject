@@ -19,3 +19,6 @@ Package.resolved
 # Cocoapods
 .build/
 Pods/
+
+# MacOS
+*.DS_Store

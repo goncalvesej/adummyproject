@@ -6,6 +6,7 @@
 //  Copyright © 2022 goncalvesej. All rights reserved.
 //
 
+import Coordinator
 import UIKit
 
 internal enum FaqCoordinatorEvent: CoordinatorEvent {
@@ -14,12 +15,12 @@ internal enum FaqCoordinatorEvent: CoordinatorEvent {
 
 }
 
-internal class FaqCoordinator: Coordinator {
+internal class FaqCoordinator: CoordinatorProtocol {
 
     internal let uuid = String(describing: FaqCoordinator.self)
 
-    internal var parentCoordinator: Coordinator?
-    internal var children: [Coordinator] = []
+    internal var parentCoordinator: CoordinatorProtocol?
+    internal var children: [CoordinatorProtocol] = []
     internal var navigationController: UINavigationController
 
     private var service: ServiceProtocol

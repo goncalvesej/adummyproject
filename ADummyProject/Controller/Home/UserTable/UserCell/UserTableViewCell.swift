@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Components
 
 internal class UserTableViewCell: UITableViewCell {
 
@@ -38,7 +39,7 @@ internal class UserTableViewCell: UITableViewCell {
 
 }
 
-extension UserTableViewCell: ViewCode {
+extension UserTableViewCell: ViewCoding {
 
     internal func buildHierarchy() {
         container.addSubview(nameLabel)
