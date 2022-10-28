@@ -12,9 +12,11 @@ internal class HomeViewController: UIViewController {
     private var users: [DummyUser]?
     
     internal let service: ServiceProtocol
+    internal let coordinator: AppCoordinator
     
-    internal init (_ service: ServiceProtocol) {
+    internal init (_ service: ServiceProtocol, _ coordinator: AppCoordinator) {
         self.service = service
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -70,9 +72,10 @@ internal class HomeViewController: UIViewController {
     }
     
     @objc private func openFaq() {
-        let alert = UIAlertController(title: "Faq open", message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Close", style: .cancel){ _ in })
-        self.present(alert, animated: true)
+//        let alert = UIAlertController(title: "Faq open", message: nil, preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Close", style: .cancel){ _ in })
+//        self.present(alert, animated: true)
+        coordinator.handle(AppCoordinatorEvent.faq)
     }
     
 }
@@ -81,10 +84,12 @@ extension HomeViewController: HomeViewDelegate {
     
     internal func didSelectRow(_ index:  IndexPath) {
         if let users {
-            let user = users[index.row]
-            let alert = UIAlertController(title: user.name, message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Understood", style: .cancel){ _ in })
-            self.present(alert, animated: true)
+//            let user = users[index.row]
+//            let alert = UIAlertController(title: user.name, message: nil, preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "Understood", style: .cancel){ _ in })
+//            self.present(alert, animated: true)
+            
+            coordinator.handle(AppCoordinatorEvent.home)
         }
     }
     
