@@ -8,13 +8,13 @@
 import Foundation
 
 internal protocol UserTableViewCellModelProtocol {
-    
+
     var user: DummyUser { get }
-    
+
 }
 
 internal struct UserTableViewCellModel: UserTableViewCellModelProtocol {
-    
+
     internal var user: DummyUser
-    
+
 }

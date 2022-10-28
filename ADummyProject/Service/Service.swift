@@ -8,39 +8,39 @@
 import Foundation
 
 internal enum Request {
-    
+
     case fetchUsers
-    
+
     internal var route: String {
         switch self {
         case .fetchUsers:
             return "users"
         }
     }
-    
+
 }
 
 internal protocol ServiceProtocol {
-    
+
     func fetchUsers(completion: @escaping (Result<[DummyUser], Error>) -> Void)
-    
+
 }
 
 internal class RequestError: Error {
-    
+
 }
 
 internal class Service: ServiceProtocol {
-    
+
     internal static let shared = Service()
-    
+
     private init() {
-        
+
     }
-    
+
     private let baseURL = "https://jsonplaceholder.typicode.com"
-    
-    private func fetch<T: Codable>(_ route: String, completion: @escaping  (Result<T, Error>) -> ()) {
+
+    private func fetch<T: Codable>(_ route: String, completion: @escaping  (Result<T, Error>) -> Void) {
         let base = URL(string: baseURL)
         guard let requestURL = base?.appendingPathComponent(route) else {
             return
@@ -54,7 +54,7 @@ internal class Service: ServiceProtocol {
                     completion(.failure(RequestError()))
                     return
                 }
-                
+
                 do {
                     let response = try JSONDecoder().decode(T.self, from: data)
                     completion(.success(response))
@@ -64,7 +64,7 @@ internal class Service: ServiceProtocol {
             }
         }.resume()
     }
-    
+
 }
 
 extension Service {

@@ -11,31 +11,31 @@ import UIKit
 internal enum FaqCoordinatorEvent: CoordinatorEvent {
 
     case faq, pop
-    
+
 }
 
 internal class FaqCoordinator: Coordinator {
-    
-    let uuid = String(describing: FaqCoordinator.self)    
-    
+
+    let uuid = String(describing: FaqCoordinator.self)
+
     internal var parentCoordinator: Coordinator?
     internal var children: [Coordinator] = []
     internal var navigationController: UINavigationController
-    
+
     private var service: ServiceProtocol
-    
-    internal init(navigationController : UINavigationController,
+
+    internal init(navigationController: UINavigationController,
                   service: ServiceProtocol) {
-        
+
         self.navigationController = navigationController
         self.service = service
-        
+
     }
-    
+
     internal func start() {
         handle(FaqCoordinatorEvent.faq)
     }
-    
+
     func handle(_ event: CoordinatorEvent) {
         if let faqEvent = event as? FaqCoordinatorEvent {
             switch faqEvent {
@@ -50,9 +50,9 @@ internal class FaqCoordinator: Coordinator {
             fatalError("event not found in coordinator chain")
         }
         parentCoordinator.handle(event)
-        
+
     }
-    
+
 }
 
 // MARK: Extension - Navigation methods
@@ -63,7 +63,7 @@ extension FaqCoordinator {
         let viewController = FaqViewController()
         navigationController.pushViewController(viewController, animated: true)
     }
-    
+
     private func popNavigation() {
         if navigationController.viewControllers.count > 1 {
             var viewControllers = navigationController.viewControllers
@@ -73,5 +73,5 @@ extension FaqCoordinator {
         }
         parentCoordinator?.removeChild(self)
     }
-    
+
 }

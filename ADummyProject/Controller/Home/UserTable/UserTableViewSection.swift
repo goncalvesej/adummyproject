@@ -8,15 +8,15 @@
 import Foundation
 
 internal final class UserTableViewSection: TableViewSectionProtocol {
-    
+
     typealias CellViewModel = UserTableViewCellModel
-    
+
     internal var sectionTitle: String
     internal var cellsViewModels: [UserTableViewCellModel]
-    
+
     internal init(sectionTitle: String, cellsViewModels: [UserTableViewCellModel]) {
         self.sectionTitle = sectionTitle
         self.cellsViewModels = cellsViewModels
     }
-    
+
 }

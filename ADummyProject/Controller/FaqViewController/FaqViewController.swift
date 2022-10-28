@@ -9,18 +9,18 @@
 import UIKit
 
 internal final class FaqViewController: UIViewController {
-    
+
     internal init() {
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     internal required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     internal override func viewDidLoad() {
         let view = FaqView()
         self.view = view
     }
-    
+
 }
