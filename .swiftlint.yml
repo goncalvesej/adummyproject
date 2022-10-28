@@ -10,8 +10,8 @@ opt_in_rules:
   - lower_acl_than_parent
 
 included:
-  - Sources
-  - Tests
+  - ADummyProject
+  - ADummyProjectTests
 
 # excluded:
 analyzer_rules:
@@ -22,7 +22,7 @@ force_cast: warning # implicitly
 force_try:
   severity: warning # explicitly
 
-line_length: 110
+line_length: 150
 
 
 type_body_length:

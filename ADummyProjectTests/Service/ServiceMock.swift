@@ -10,8 +10,8 @@ import Foundation
 @testable import ADummyProject
 
 internal final class ServiceMock: ServiceProtocol {
-    
-    func fetchUsers(completion: @escaping (Result<[DummyUser], Error>) -> Void) {
+
+    internal func fetchUsers(completion: @escaping (Result<[DummyUser], Error>) -> Void) {
         completion(.success([]))
     }
 }

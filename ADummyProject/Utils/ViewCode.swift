@@ -18,7 +18,7 @@ internal protocol ViewCode {
 
 extension ViewCode {
 
-    func setUpView() {
+    internal func setUpView() {
         buildHierarchy()
         setUpConstraints()
         render()

@@ -9,7 +9,7 @@ import Foundation
 
 internal final class UserTableViewSection: TableViewSectionProtocol {
 
-    typealias CellViewModel = UserTableViewCellModel
+    internal typealias CellViewModel = UserTableViewCellModel
 
     internal var sectionTitle: String
     internal var cellsViewModels: [UserTableViewCellModel]

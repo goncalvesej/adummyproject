@@ -11,21 +11,20 @@ import XCTest
 @testable import ADummyProject
 
 internal final class HomeViewControllerTestCase: XCTestCase {
-    
-    var sut: HomeViewController!
-    
-    
+
+    internal var sut: HomeViewController!
+
     internal override func setUp() {
         super.setUp()
-        sut = HomeViewController(ServiceMock())
+//        sut = HomeViewController(ServiceMock())
     }
-    
+
     internal override func tearDown() {
         sut = nil
     }
-    
+
     internal func testCase1() {
-        
+
     }
-    
+
 }

@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol CoordinatorEvent {
+internal protocol CoordinatorEvent {
 
 }
 
-protocol Coordinator {
+internal protocol Coordinator {
 
     var uuid: String { get }
     var parentCoordinator: Coordinator? { get set }

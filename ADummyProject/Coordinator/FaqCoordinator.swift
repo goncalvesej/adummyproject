@@ -16,7 +16,7 @@ internal enum FaqCoordinatorEvent: CoordinatorEvent {
 
 internal class FaqCoordinator: Coordinator {
 
-    let uuid = String(describing: FaqCoordinator.self)
+    internal let uuid = String(describing: FaqCoordinator.self)
 
     internal var parentCoordinator: Coordinator?
     internal var children: [Coordinator] = []
@@ -36,7 +36,7 @@ internal class FaqCoordinator: Coordinator {
         handle(FaqCoordinatorEvent.faq)
     }
 
-    func handle(_ event: CoordinatorEvent) {
+    internal func handle(_ event: CoordinatorEvent) {
         if let faqEvent = event as? FaqCoordinatorEvent {
             switch faqEvent {
             case .faq:

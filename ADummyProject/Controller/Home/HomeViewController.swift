@@ -81,14 +81,13 @@ internal class HomeViewController: UIViewController {
 extension HomeViewController: HomeViewDelegate {
 
     internal func didSelectRow(_ index: IndexPath) {
-        if let users {
+//        if let users {
 //            let user = users[index.row]
 //            let alert = UIAlertController(title: user.name, message: nil, preferredStyle: .alert)
 //            alert.addAction(UIAlertAction(title: "Understood", style: .cancel){ _ in })
 //            self.present(alert, animated: true)
-
-            coordinator.handle(AppCoordinatorEvent.home)
-        }
+//        }
+        coordinator.handle(AppCoordinatorEvent.home)
     }
 
 }

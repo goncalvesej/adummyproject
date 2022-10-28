@@ -36,7 +36,7 @@ internal class AppCoordinator: Coordinator {
         self.handle(AppCoordinatorEvent.home)
     }
 
-    func handle(_ event: CoordinatorEvent) {
+    internal func handle(_ event: CoordinatorEvent) {
         if let appEvent = event as? AppCoordinatorEvent {
             switch appEvent {
             case .home:
