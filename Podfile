@@ -3,7 +3,7 @@ use_frameworks!
 
 def common_pods
 
-  pod 'Components/Debug', :git => 'git@github.com:goncalvesej/components.git', commit: 'a88ae558333c00be0902bba7ea0c235c7bb7c31b'  
+  pod 'Components/Debug', :git => 'git@github.com:goncalvesej/components.git', commit: 'ad07aa3a92c0b991bfd5145457b66a1b832e1f1c'
 
 end
 

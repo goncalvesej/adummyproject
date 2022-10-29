@@ -41,9 +41,6 @@ targets:
         IPHONEOS_DEPLOYMENT_TARGET: 13.0
         TARGETED_DEVICE_FAMILY: "1"
         PRODUCT_NAME: ADummyProject
-        CODE_SIGN_STYLE: Manual
-        CODE_SIGN_IDENTITY: iPhone Developer
-        CODE_SIGN_IDENTITY [sdk=iphoneos*]: iPhone Developer
 
   ADummyProjectTests:
     platform: iOS
