@@ -9,12 +9,15 @@ import Foundation
 
 internal enum Request {
 
-    case fetchUsers
+    case posts
+    case commentsByPost(Int)
 
     internal var route: String {
         switch self {
-        case .fetchUsers:
-            return "users"
+        case .posts:
+            return "posts"
+        case let .commentsByPost(postId):
+            return "post/\(postId)/comments"
         }
     }
 
@@ -22,7 +25,8 @@ internal enum Request {
 
 internal protocol ServiceProtocol {
 
-    func fetchUsers(completion: @escaping (Result<[DummyUser], Error>) -> Void)
+    func fetchPosts(completion: @escaping (Result<[Post], Error>) -> Void)
+    func fetchCommentsByPost(postId: Int, completion: @escaping (Result<[Comment], Error>) -> Void)
 
 }
 
@@ -69,8 +73,12 @@ internal class Service: ServiceProtocol {
 
 extension Service {
 
-    internal func fetchUsers(completion: @escaping (Result<[DummyUser], Error>) -> Void) {
-        self.fetch(Request.fetchUsers.route, completion: completion)
+    internal func fetchPosts(completion: @escaping (Result<[Post], Error>) -> Void) {
+        self.fetch(Request.posts.route, completion: completion)
+    }
+
+    internal func fetchCommentsByPost(postId: Int, completion: @escaping (Result<[Comment], Error>) -> Void) {
+        self.fetch(Request.commentsByPost(postId).route, completion: completion)
     }
 
 }

@@ -23,14 +23,8 @@ internal class FaqCoordinator: CoordinatorProtocol {
     internal var children: [CoordinatorProtocol] = []
     internal var navigationController: UINavigationController
 
-    private var service: ServiceProtocol
-
-    internal init(navigationController: UINavigationController,
-                  service: ServiceProtocol) {
-
+    internal init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.service = service
-
     }
 
     internal func start() {
@@ -61,7 +55,7 @@ internal class FaqCoordinator: CoordinatorProtocol {
 extension FaqCoordinator {
 
     private func navigateToFaq() {
-        let viewController = FaqViewController()
+        let viewController = FaqViewController(self)
         navigationController.pushViewController(viewController, animated: true)
     }
 

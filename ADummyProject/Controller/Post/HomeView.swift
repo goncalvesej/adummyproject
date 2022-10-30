@@ -20,7 +20,7 @@ internal final class HomeView: UIView {
     internal var tableView: UITableView
     internal weak var theDelegate: HomeViewDelegate?
 
-    private var tableDataSource: UserTableViewDataSource
+    private var tableDataSource: PostTableViewDataSource
 
     internal var viewModel: HomeViewModelProtocol? {
         didSet {
@@ -30,12 +30,14 @@ internal final class HomeView: UIView {
 
     internal override init (frame: CGRect) {
         container = UIView()
-        tableDataSource = UserTableViewDataSource()
+        tableDataSource = PostTableViewDataSource()
         tableView = UITableView()
         tableView.dataSource = tableDataSource
-        tableView.register(UserTableViewCell.self, forCellReuseIdentifier: String(describing: UserTableViewCell.self))
+        tableView.delegate = tableDataSource
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: String(describing: PostTableViewCell.self))
 
         super.init(frame: frame)
+        tableDataSource.didSelectRow = selectedRow
         setUpView()
     }
 
@@ -80,21 +82,16 @@ extension HomeView: ViewCoding {
     }
 
     internal func render() {
-        container.backgroundColor = .black
-        tableView.delegate = self
+        container.backgroundColor = Theme.shared.colors.background_base
         tableView.rowHeight = 80
-        tableView.backgroundColor = .black
+        tableView.backgroundColor = Theme.shared.colors.background_base
     }
 
     internal func setUpAccessibility() {
 
     }
 
-}
-
-extension HomeView: UITableViewDelegate {
-
-    internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    private func selectedRow(indexPath: IndexPath) {
         theDelegate?.didSelectRow(indexPath)
     }
 

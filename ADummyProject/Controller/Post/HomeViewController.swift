@@ -5,11 +5,12 @@
 //  Created by Eraldo Jr. on 25/10/22.
 //
 
+import Components
 import UIKit
 
 internal class HomeViewController: UIViewController {
 
-    private var users: [DummyUser]?
+    private var data: [Post]?
 
     internal let service: ServiceProtocol
     internal let coordinator: AppCoordinator
@@ -30,15 +31,15 @@ internal class HomeViewController: UIViewController {
         theView.theDelegate = self
         view = theView
 
-        setupNavigation(title: "Home Screen")
+        setupNavigation(title: "Posts")
         fetchData()
     }
 
     private func fetchData() {
-        service.fetchUsers(completion: { [weak self] result in
+        service.fetchPosts(completion: { [weak self] result in
             switch result {
             case .success(let data):
-                self?.users = data
+                self?.data = data
                 if let theView = self?.view as? HomeView {
                     theView.viewModel = HomeViewModel(data)
                 }
@@ -57,11 +58,11 @@ internal class HomeViewController: UIViewController {
         self.title = title
         if let navigationController {
             navigationController.navigationBar.barStyle = .black
-            navigationController.navigationBar.tintColor = .white
+            navigationController.navigationBar.tintColor = Theme.shared.colors.foreground_base
 
             let buttonImage = UIImage(systemName: "questionmark.circle.fill")
             let faqButton = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(openFaq))
-            faqButton.tintColor = .white
+            faqButton.tintColor = Theme.shared.colors.foreground_base
             navigationItem.rightBarButtonItem = faqButton
             let btn = UIButton()
             btn.addTarget(self, action: #selector(openFaq), for: .touchUpInside)
@@ -76,17 +77,18 @@ internal class HomeViewController: UIViewController {
         coordinator.handle(AppCoordinatorEvent.faq)
     }
 
+    private func openComments(postId: Int) {
+//        let alert = UIAlertController(title: "Faq open", message: nil, preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Close", style: .cancel){ _ in })
+//        self.present(alert, animated: true)
+        coordinator.handle(AppCoordinatorEvent.commentsByPost(postId))
+    }
+
 }
 
 extension HomeViewController: HomeViewDelegate {
 
     internal func didSelectRow(_ index: IndexPath) {
-//        if let users {
-//            let user = users[index.row]
-//            let alert = UIAlertController(title: user.name, message: nil, preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Understood", style: .cancel){ _ in })
-//            self.present(alert, animated: true)
-//        }
         coordinator.handle(AppCoordinatorEvent.home)
     }
 

@@ -1,5 +1,5 @@
 //
-//  UserTableViewSection.swift
+//  PostTableViewSection.swift
 //  ADummyProject
 //
 //  Created by Eraldo Jr. on 25/10/22.
@@ -8,9 +8,9 @@
 import Foundation
 import Components
 
-internal final class UserTableViewSection: TableViewSectionProtocol {
+internal final class PostTableViewSection: TableViewSectionProtocol {
 
-    internal typealias CellViewModel = UserTableViewCellModel
+    internal typealias CellViewModel = PostTableViewCellModel
 
     internal var sectionTitle: String
     internal var cellsViewModels: [CellViewModel]
