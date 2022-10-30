@@ -1,5 +1,5 @@
 //
-//  HomeViewControllerTestCase.swift
+//  PostViewControllerTestCase.swift
 //  ADummyProjectTests
 //
 //  Created by Eraldo Jr. on 25/10/22.
@@ -10,13 +10,13 @@ import XCTest
 
 @testable import ADummyProject
 
-internal final class HomeViewControllerTestCase: XCTestCase {
+internal final class PostViewControllerTestCase: XCTestCase {
 
-    internal var sut: HomeViewController!
+    internal var sut: PostViewController!
 
     internal override func setUp() {
         super.setUp()
-//        sut = HomeViewController(ServiceMock())
+//        sut = PostViewController(ServiceMock())
     }
 
     internal override func tearDown() {

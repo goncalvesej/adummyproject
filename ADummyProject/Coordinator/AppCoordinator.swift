@@ -11,7 +11,7 @@ import Coordinator
 
 internal enum AppCoordinatorEvent: CoordinatorEvent {
 
-    case home, faq, pop
+    case posts, faq, pop
     case commentsByPost(Int)
 
 }
@@ -35,14 +35,14 @@ internal class AppCoordinator: CoordinatorProtocol {
     }
 
     internal func start() {
-        self.handle(AppCoordinatorEvent.home)
+        self.handle(AppCoordinatorEvent.posts)
     }
 
     internal func handle(_ event: CoordinatorEvent) {
         if let appEvent = event as? AppCoordinatorEvent {
             switch appEvent {
-            case .home:
-                navigateToHome()
+            case .posts:
+                navigateToPosts()
             case .faq:
                 let coordinator = FaqCoordinator(navigationController: navigationController)
                 coordinator.start()
@@ -65,14 +65,14 @@ internal class AppCoordinator: CoordinatorProtocol {
 
 extension AppCoordinator {
 
-    private func navigateToHome() {
-        let viewController = HomeViewController(service, self)
+    private func navigateToPosts() {
+        let viewController = PostViewController(service, self)
         navigationController.pushViewController(viewController, animated: true)
     }
-    
+
     private func navigateToCommentsByPost(_ postId: Int) {
-//        let viewController = HomeViewController(service, self)
-//        navigationController.pushViewController(viewController, animated: true)
+        let viewController = CommentViewController(postId: postId, service, self)
+        navigationController.pushViewController(viewController, animated: true)
     }
 
     private func popNavigation() {

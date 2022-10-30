@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  PostView.swift
 //  ADummyProject
 //
 //  Created by Eraldo Jr. on 25/10/22.
@@ -8,21 +8,21 @@
 import UIKit
 import Components
 
-internal protocol HomeViewDelegate: AnyObject {
+internal protocol PostViewDelegate: AnyObject {
 
     func didSelectRow(_ indexPath: IndexPath)
 
 }
 
-internal final class HomeView: UIView {
+internal final class PostView: UIView {
 
     internal var container: UIView
     internal var tableView: UITableView
-    internal weak var theDelegate: HomeViewDelegate?
+    internal weak var theDelegate: PostViewDelegate?
 
-    private var tableDataSource: PostTableViewDataSource
+    private var tableDataSource: BasicTableViewDataSourceProtocol
 
-    internal var viewModel: HomeViewModelProtocol? {
+    internal var viewModel: PostViewModelProtocol? {
         didSet {
             update()
         }
@@ -30,14 +30,13 @@ internal final class HomeView: UIView {
 
     internal override init (frame: CGRect) {
         container = UIView()
-        tableDataSource = PostTableViewDataSource()
+        tableDataSource = BasicTableViewDataSource()
         tableView = UITableView()
         tableView.dataSource = tableDataSource
-        tableView.delegate = tableDataSource
-        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: String(describing: PostTableViewCell.self))
+        tableView.register(BasicCellView.self, forCellReuseIdentifier: String(describing: BasicCellView.self))
 
         super.init(frame: frame)
-        tableDataSource.didSelectRow = selectedRow
+//        tableDataSource.didSelectRow = selectedRow
         setUpView()
     }
 
@@ -54,7 +53,7 @@ internal final class HomeView: UIView {
 
 }
 
-extension HomeView: ViewCoding {
+extension PostView: ViewCoding {
 
     internal func buildHierarchy() {
         container.addSubview(tableView)
@@ -83,8 +82,11 @@ extension HomeView: ViewCoding {
 
     internal func render() {
         container.backgroundColor = Theme.shared.colors.background_base
-        tableView.rowHeight = 80
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.backgroundColor = Theme.shared.colors.background_base
+        tableView.delegate = self
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
+        tableView.separatorColor = Theme.shared.colors.feedback_success_light
     }
 
     internal func setUpAccessibility() {
@@ -93,6 +95,22 @@ extension HomeView: ViewCoding {
 
     private func selectedRow(indexPath: IndexPath) {
         theDelegate?.didSelectRow(indexPath)
+    }
+
+}
+
+extension PostView: UITableViewDelegate {
+    
+    internal func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return Theme.shared.spacing.size_xl
+    }
+
+    internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedRow(indexPath: indexPath)
+    }
+    
+    internal func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return tableDataSource.sectionHeaderFactory(tableView: tableView, section: section, headerHeight: Theme.shared.spacing.size_xl)
     }
 
 }

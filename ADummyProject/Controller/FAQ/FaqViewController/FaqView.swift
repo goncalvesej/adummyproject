@@ -14,7 +14,6 @@ internal final class FaqView: UIView {
     internal var container: UIView
     internal var label: UILabel
 
-
     internal var viewModel: FaqViewModelProtocol? {
         didSet {
             update()
@@ -61,7 +60,7 @@ extension FaqView: ViewCoding {
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: container.topAnchor, constant: Theme.shared.spacing.size_md),
             label.leftAnchor.constraint(equalTo: container.leftAnchor, constant: Theme.shared.spacing.size_md),
-            label.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -Theme.shared.spacing.size_md),
+            label.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -Theme.shared.spacing.size_md)
         ])
 
     }

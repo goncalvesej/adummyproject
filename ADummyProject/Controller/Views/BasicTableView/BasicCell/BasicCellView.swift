@@ -1,19 +1,20 @@
 //
-//  PostTableViewCell.swift
+//  BasicCellView.swift
 //  ADummyProject
 //
-//  Created by Eraldo Jr. on 25/10/22.
+//  Created by Eraldo Jr. on 30/10/22.
+//  Copyright © 2022 goncalvesej. All rights reserved.
 //
 
 import UIKit
 import Components
 
-internal class PostTableViewCell: UITableViewCell {
+internal class BasicCellView: UITableViewCell {
 
     private let container: UIView
     private let nameLabel: UILabel
 
-    internal var viewModel: PostTableViewCellModel? {
+    internal var viewModel: BasicCellViewModel? {
         didSet {
             update()
         }
@@ -33,13 +34,13 @@ internal class PostTableViewCell: UITableViewCell {
 
     private func update() {
         if let viewModel {
-            nameLabel.text = viewModel.post.title
+            nameLabel.text = viewModel.text
         }
     }
 
 }
 
-extension PostTableViewCell: ViewCoding {
+extension BasicCellView: ViewCoding {
 
     internal func buildHierarchy() {
         container.addSubview(nameLabel)
@@ -50,9 +51,9 @@ extension PostTableViewCell: ViewCoding {
         container.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            container.topAnchor.constraint(equalTo: self.topAnchor),
+            container.topAnchor.constraint(equalTo: self.topAnchor, constant: Theme.shared.spacing.size_sm),
             container.rightAnchor.constraint(equalTo: self.rightAnchor),
-            container.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            container.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Theme.shared.spacing.size_sm),
             container.leftAnchor.constraint(equalTo: self.leftAnchor),
 
             nameLabel.topAnchor.constraint(equalTo: container.topAnchor),

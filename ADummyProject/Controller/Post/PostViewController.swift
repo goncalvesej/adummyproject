@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  PostViewController.swift
 //  ADummyProject
 //
 //  Created by Eraldo Jr. on 25/10/22.
@@ -8,7 +8,7 @@
 import Components
 import UIKit
 
-internal class HomeViewController: UIViewController {
+internal class PostViewController: UIViewController {
 
     private var data: [Post]?
 
@@ -27,7 +27,7 @@ internal class HomeViewController: UIViewController {
 
     internal override func viewDidLoad() {
         super.viewDidLoad()
-        let theView = HomeView()
+        let theView = PostView()
         theView.theDelegate = self
         view = theView
 
@@ -36,12 +36,12 @@ internal class HomeViewController: UIViewController {
     }
 
     private func fetchData() {
-        service.fetchPosts(completion: { [weak self] result in
+        service.fetchPosts { [weak self] result in
             switch result {
             case .success(let data):
                 self?.data = data
-                if let theView = self?.view as? HomeView {
-                    theView.viewModel = HomeViewModel(data)
+                if let theView = self?.view as? PostView {
+                    theView.viewModel = PostViewModel(data)
                 }
             case .failure:
                 let alert = UIAlertController(title: "Ouch!", message: "Something went wrong", preferredStyle: .alert)
@@ -51,7 +51,7 @@ internal class HomeViewController: UIViewController {
                 self?.present(alert, animated: true, completion: nil)
             }
 
-        })
+        }
     }
 
     private func setupNavigation(title: String) {
@@ -71,25 +71,24 @@ internal class HomeViewController: UIViewController {
     }
 
     @objc private func openFaq() {
-//        let alert = UIAlertController(title: "Faq open", message: nil, preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "Close", style: .cancel){ _ in })
-//        self.present(alert, animated: true)
         coordinator.handle(AppCoordinatorEvent.faq)
     }
 
     private func openComments(postId: Int) {
-//        let alert = UIAlertController(title: "Faq open", message: nil, preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "Close", style: .cancel){ _ in })
-//        self.present(alert, animated: true)
         coordinator.handle(AppCoordinatorEvent.commentsByPost(postId))
     }
 
 }
 
-extension HomeViewController: HomeViewDelegate {
+extension PostViewController: PostViewDelegate {
 
     internal func didSelectRow(_ index: IndexPath) {
-        coordinator.handle(AppCoordinatorEvent.home)
+        if let data,
+           index.row < data.count {
+            let post = data[index.row]
+            coordinator.handle(AppCoordinatorEvent.commentsByPost(post.id))
+        }
+
     }
 
 }

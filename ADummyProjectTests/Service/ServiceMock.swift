@@ -14,9 +14,9 @@ internal final class ServiceMock: ServiceProtocol {
     internal func fetchPosts(completion: @escaping (Result<[Post], Error>) -> Void) {
         completion(.success([]))
     }
-    
-    func fetchCommentsByPost(postId: Int, completion: @escaping (Result<[Comment], Error>) -> Void) {
+
+    internal func fetchCommentsByPost(postId: Int, completion: @escaping (Result<[Comment], Error>) -> Void) {
         completion(.success([]))
     }
-    
+
 }
