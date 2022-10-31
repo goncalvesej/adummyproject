@@ -6,6 +6,7 @@
 //
 
 import Components
+import Coordinator
 import UIKit
 
 internal class PostViewController: UIViewController {
@@ -13,9 +14,9 @@ internal class PostViewController: UIViewController {
     private var data: [Post]?
 
     internal let service: ServiceProtocol
-    internal let coordinator: AppCoordinator
+    internal let coordinator: CoordinatorProtocol
 
-    internal init (_ service: ServiceProtocol, _ coordinator: AppCoordinator) {
+    internal init (_ service: ServiceProtocol, _ coordinator: CoordinatorProtocol) {
         self.service = service
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)

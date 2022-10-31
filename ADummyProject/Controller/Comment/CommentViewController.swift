@@ -7,6 +7,7 @@
 //
 
 import Components
+import Coordinator
 import UIKit
 
 internal class CommentViewController: UIViewController {
@@ -14,10 +15,10 @@ internal class CommentViewController: UIViewController {
     private var data: [Comment]?
 
     internal let service: ServiceProtocol
-    internal let coordinator: AppCoordinator
+    internal let coordinator: CoordinatorProtocol
     internal let postId: Int
 
-    internal init (postId: Int, _ service: ServiceProtocol, _ coordinator: AppCoordinator) {
+    internal init (postId: Int, _ service: ServiceProtocol, _ coordinator: CoordinatorProtocol) {
         self.service = service
         self.coordinator = coordinator
         self.postId = postId

@@ -11,8 +11,8 @@ import Components
 
 internal class BasicCellView: UITableViewCell {
 
-    private let container: UIView
-    private let nameLabel: UILabel
+    internal let container: UIView
+    internal let nameLabel: UILabel
 
     internal var viewModel: BasicCellViewModel? {
         didSet {

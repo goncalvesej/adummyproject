@@ -36,7 +36,6 @@ internal final class PostView: UIView {
         tableView.register(BasicCellView.self, forCellReuseIdentifier: String(describing: BasicCellView.self))
 
         super.init(frame: frame)
-//        tableDataSource.didSelectRow = selectedRow
         setUpView()
     }
 

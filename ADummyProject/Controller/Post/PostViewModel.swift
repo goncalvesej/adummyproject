@@ -29,7 +29,7 @@ internal struct PostViewModel: PostViewModelProtocol {
         for post in post {
             viewModels.append(BasicCellViewModel(text: post.title))
         }
-        sections.append(BasicTableViewSection(sectionTitle: "Posts", cellsViewModels: viewModels))
+        sections.append(BasicTableViewSection(sectionTitle: "All posts", cellsViewModels: viewModels))
         return sections
 
     }
