@@ -61,8 +61,8 @@ internal final class PostViewTestCase: XCTestCase {
         XCTAssertNil(delegate.selectedIndexPath)
         let indexPath = IndexPath(row: 0, section: 0)
         sut.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
-//        XCUIApplication().tables.cells.element(boundBy: 2).tap()
-//        XCTAssertEqual(indexPath, delegate.selectedIndexPath)
+        sut.tableView.delegate?.tableView?(sut.tableView, didSelectRowAt: indexPath)
+        XCTAssertEqual(indexPath, delegate.selectedIndexPath)
     }
 
 }

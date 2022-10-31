@@ -18,9 +18,8 @@ internal final class PostView: UIView {
 
     internal var container: UIView
     internal var tableView: UITableView
+    internal var tableDataSource: BasicTableViewDataSourceProtocol
     internal weak var theDelegate: PostViewDelegate?
-
-    private var tableDataSource: BasicTableViewDataSourceProtocol
 
     internal var viewModel: PostViewModelProtocol? {
         didSet {
