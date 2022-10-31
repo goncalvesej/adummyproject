@@ -12,11 +12,12 @@ import UIKit
 @testable import ADummyProject
 
 internal final class AppCoordinatorFake: CoordinatorProtocol {
-    
+
     internal var isNavigateToPostsCalled = false
-    internal var isNavigateToCommentsByPostCalled = false
     internal var isPopCalled = false
     internal var isFaqCalled = false
+    internal var isNavigateToCommentsByPostCalled = false
+    internal var postIdCommentsCalled: Int?
 
     internal let uuid = String(describing: AppCoordinatorFake.self)
 
@@ -36,6 +37,8 @@ internal final class AppCoordinatorFake: CoordinatorProtocol {
 
     internal func start() {
         self.handle(AppCoordinatorEvent.posts)
+        let viewController = PostViewController(service, self)
+        navigationController.pushViewController(viewController, animated: false)
     }
 
     internal func handle(_ event: CoordinatorEvent) {
@@ -70,6 +73,7 @@ extension AppCoordinatorFake {
 
     private func navigateToCommentsByPost(_ postId: Int) {
         isNavigateToCommentsByPostCalled = true
+        postIdCommentsCalled = postId
     }
 
     private func popNavigation() {
@@ -77,4 +81,3 @@ extension AppCoordinatorFake {
     }
 
 }
-

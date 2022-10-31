@@ -22,8 +22,7 @@ internal final class FAQViewControllerTestCase: XCTestCase {
         super.setUp()
         navigationController = UINavigationController()
         fakeCoordinator = FaqCoordinatorFake(navigationController: navigationController)
-        sut = fakeCoordinator.start()
-        fakeCoordinator.handle(FaqCoordinatorEvent.faq)
+        fakeCoordinator.start()
     }
 
     internal override func tearDown() {
@@ -33,19 +32,21 @@ internal final class FAQViewControllerTestCase: XCTestCase {
         navigationController = nil
     }
 
-    internal func testVC() throws {
+    internal func testViewControllerNavigation() throws {
+        sut = try XCTUnwrap(navigationController.viewControllers.first as? FaqViewController)
         let view = try XCTUnwrap(sut.view as? FaqView)
         XCTAssertNotNil(view)
         XCTAssertEqual(sut.title, "FAQ")
     }
-    
+
     internal func testEvent() throws {
+        sut = try XCTUnwrap(navigationController.viewControllers.first as? FaqViewController)
         sut.view.layoutIfNeeded()
         XCTAssertTrue(fakeCoordinator.isNavigateToFaqCalled)
         XCTAssertFalse(fakeCoordinator.isPopCalled)
         let navigationItem = try XCTUnwrap(sut.navigationItem)
         let backButton = try XCTUnwrap(navigationItem.leftBarButtonItem)
-        let _ = backButton.target?.perform(backButton.action)
+        _ = backButton.target?.perform(backButton.action)
         XCTAssertTrue(fakeCoordinator.isPopCalled)
     }
 

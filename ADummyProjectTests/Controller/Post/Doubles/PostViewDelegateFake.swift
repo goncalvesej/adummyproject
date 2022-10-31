@@ -11,11 +11,11 @@ import Foundation
 @testable import ADummyProject
 
 internal final class PostViewDelegateFake: PostViewDelegate {
-    
+
     internal var selectedIndexPath: IndexPath?
-    
+
     internal func didSelectRow(_ indexPath: IndexPath) {
         selectedIndexPath = indexPath
     }
-    
+
 }

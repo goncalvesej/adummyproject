@@ -10,9 +10,8 @@ import Foundation
 
 @testable import ADummyProject
 
-
 extension FaqViewModel {
-    
-    static var dummy = FaqViewModel(text: "FaqViewModel text")
-    
+
+    internal static var dummy = FaqViewModel(text: "FaqViewModel text")
+
 }

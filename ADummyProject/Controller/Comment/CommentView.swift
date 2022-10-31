@@ -87,7 +87,7 @@ extension CommentView: ViewCoding {
         tableView.delegate = self
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
         tableView.separatorColor = Theme.shared.colors.feedback_success_light
-        
+
     }
 
     internal func setUpAccessibility() {
@@ -101,15 +101,15 @@ extension CommentView: ViewCoding {
 }
 
 extension CommentView: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+
+    internal func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return Theme.shared.spacing.size_xl
     }
 
     internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedRow(indexPath: indexPath)
     }
-    
+
     internal func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return tableDataSource.sectionHeaderFactory(tableView: tableView, section: section, headerHeight: Theme.shared.spacing.size_xl)
     }

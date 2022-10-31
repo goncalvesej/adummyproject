@@ -44,7 +44,14 @@ internal final class PostViewTestCase: XCTestCase {
         XCTAssertEqual(sut.tableView.numberOfSections, 1)
         XCTAssertEqual(sut.tableView.numberOfRows(inSection: 0), 3)
     }
-    
+
+    internal func testSectionHeader() throws {
+        sut.layoutIfNeeded()
+        let header = try XCTUnwrap(sut.tableView.delegate?.tableView?(sut.tableView, viewForHeaderInSection: 0))
+        let headerLabel = try XCTUnwrap(header.subviews.first as? UILabel)
+        XCTAssertEqual(headerLabel.text, "All posts")
+    }
+
     internal func testCell() throws {
         sut.layoutIfNeeded()
         let indexPath = IndexPath(row: 0, section: 0)
@@ -54,7 +61,7 @@ internal final class PostViewTestCase: XCTestCase {
         XCTAssertEqual(cell.nameLabel.numberOfLines, 0)
         XCTAssertEqual(cell.nameLabel.text, "some title 1")
     }
-    
+
     internal func testDelegate() {
         sut.layoutIfNeeded()
         sut.theDelegate = delegate

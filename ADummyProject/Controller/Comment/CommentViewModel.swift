@@ -20,7 +20,7 @@ internal struct CommentViewModel: CommentViewModelProtocol {
 
     internal let postId: Int
     internal let comments: [Comment]
-    
+
     internal init(postId: Int, data: [Comment]) {
         self.comments = data
         self.postId = postId

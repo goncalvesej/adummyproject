@@ -41,7 +41,7 @@ internal class FaqViewController: UIViewController {
             navigationItem.leftBarButtonItem = backButton
         }
     }
-    
+
     @objc private func popNavigation() {
         coordinator.handle(FaqCoordinatorEvent.pop)
     }

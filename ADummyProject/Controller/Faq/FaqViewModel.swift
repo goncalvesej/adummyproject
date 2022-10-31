@@ -17,8 +17,8 @@ internal protocol FaqViewModelProtocol {
 internal struct FaqViewModel: FaqViewModelProtocol {
 
     internal var text: String
-    
-    init(text: String) {
+
+    internal init(text: String) {
         self.text = text
     }
 

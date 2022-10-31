@@ -11,7 +11,7 @@ import Foundation
 @testable import ADummyProject
 
 extension PostViewModel {
-    
-    static let dummy = PostViewModel(Post.dummy)
-    
+
+    internal static let dummy = PostViewModel(Post.dummy)
+
 }

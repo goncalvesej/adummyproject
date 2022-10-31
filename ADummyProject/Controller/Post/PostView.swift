@@ -98,7 +98,7 @@ extension PostView: ViewCoding {
 }
 
 extension PostView: UITableViewDelegate {
-    
+
     internal func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return Theme.shared.spacing.size_xl
     }
@@ -106,7 +106,7 @@ extension PostView: UITableViewDelegate {
     internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedRow(indexPath: indexPath)
     }
-    
+
     internal func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return tableDataSource.sectionHeaderFactory(tableView: tableView, section: section, headerHeight: Theme.shared.spacing.size_xl)
     }

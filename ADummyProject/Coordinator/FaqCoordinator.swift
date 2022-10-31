@@ -23,8 +23,9 @@ internal class FaqCoordinator: CoordinatorProtocol {
     internal var children: [CoordinatorProtocol] = []
     internal var navigationController: UINavigationController
 
-    internal init(navigationController: UINavigationController) {
+    internal init(navigationController: UINavigationController, parentCoordinator: CoordinatorProtocol? = nil) {
         self.navigationController = navigationController
+        self.parentCoordinator = parentCoordinator
     }
 
     internal func start() {
@@ -60,13 +61,12 @@ extension FaqCoordinator {
     }
 
     private func popNavigation() {
-        if navigationController.viewControllers.count > 1 {
+        if navigationController.viewControllers.count > 0 {
             var viewControllers = navigationController.viewControllers
             viewControllers.removeLast()
             navigationController.setViewControllers(viewControllers, animated: true)
-            return
+            parentCoordinator?.removeChild(self)
         }
-        parentCoordinator?.removeChild(self)
     }
 
 }

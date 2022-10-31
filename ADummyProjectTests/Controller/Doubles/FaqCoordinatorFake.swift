@@ -12,7 +12,7 @@ import UIKit
 @testable import ADummyProject
 
 internal final class FaqCoordinatorFake: CoordinatorProtocol {
-    
+
     internal var isNavigateToFaqCalled = false
     internal var isPopCalled = false
 
@@ -22,16 +22,14 @@ internal final class FaqCoordinatorFake: CoordinatorProtocol {
     internal var children: [CoordinatorProtocol] = []
     internal var navigationController: UINavigationController
 
-
     internal init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
 
-    internal func start() -> FaqViewController {
+    internal func start() {
         self.handle(FaqCoordinatorEvent.faq)
         let viewController = FaqViewController(self)
         navigationController.pushViewController(viewController, animated: false)
-        return viewController
     }
 
     internal func handle(_ event: CoordinatorEvent) {
@@ -65,4 +63,3 @@ extension FaqCoordinatorFake {
     }
 
 }
-

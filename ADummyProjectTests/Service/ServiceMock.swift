@@ -12,11 +12,11 @@ import Foundation
 internal final class ServiceMock: ServiceProtocol {
 
     internal func fetchPosts(completion: @escaping (Result<[Post], Error>) -> Void) {
-        completion(.success([]))
+        completion(.success(Post.dummy))
     }
 
     internal func fetchCommentsByPost(postId: Int, completion: @escaping (Result<[Comment], Error>) -> Void) {
-        completion(.success([]))
+        completion(.success(Comment.dummy))
     }
 
 }

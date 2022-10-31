@@ -20,7 +20,7 @@ internal final class FaqViewTestCase: XCTestCase {
         super.setUp()
         sut = FaqView()
         sut.viewModel = FaqViewModel.dummy
-        
+
     }
 
     internal override func tearDown() {
@@ -37,4 +37,3 @@ internal final class FaqViewTestCase: XCTestCase {
     }
 
 }
-

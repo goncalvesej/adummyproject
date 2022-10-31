@@ -11,10 +11,10 @@ import Components
 internal typealias BasicTableViewDataSourceProtocol = NSObject & BasicTableViewRenderProtocol & UITableViewDataSource
 
 internal protocol BasicTableViewRenderProtocol {
-    
+
     var sections: [BasicTableViewSection] { get set }
     func sectionHeaderFactory(tableView: UITableView, section: Int, headerHeight: CGFloat) -> UIView
-    
+
 }
 
 internal class BasicTableViewDataSource: BasicTableViewDataSourceProtocol {
@@ -47,7 +47,7 @@ internal class BasicTableViewDataSource: BasicTableViewDataSourceProtocol {
         cell.viewModel = viewModel
         return cell
     }
-    
+
     internal func sectionHeaderFactory(tableView: UITableView, section: Int, headerHeight: CGFloat) -> UIView {
         let padding = Theme.shared.spacing.size_md
         let headerView = UILabel(frame: CGRect(x: padding,

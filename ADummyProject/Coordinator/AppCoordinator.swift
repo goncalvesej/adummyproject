@@ -27,10 +27,13 @@ internal class AppCoordinator: CoordinatorProtocol {
     private var service: ServiceProtocol
 
     internal init(navigationController: UINavigationController,
-                  service: ServiceProtocol) {
+                  service: ServiceProtocol,
+                  parentCoordinator: CoordinatorProtocol? = nil
+    ) {
 
         self.navigationController = navigationController
         self.service = service
+        self.parentCoordinator = parentCoordinator
 
     }
 
@@ -44,7 +47,8 @@ internal class AppCoordinator: CoordinatorProtocol {
             case .posts:
                 navigateToPosts()
             case .faq:
-                let coordinator = FaqCoordinator(navigationController: navigationController)
+                let coordinator = FaqCoordinator(navigationController: navigationController, parentCoordinator: self)
+                children.append(coordinator)
                 coordinator.start()
             case let .commentsByPost(postId):
                 navigateToCommentsByPost(postId)
@@ -80,6 +84,7 @@ extension AppCoordinator {
             var viewControllers = navigationController.viewControllers
             viewControllers.removeLast()
             navigationController.setViewControllers(viewControllers, animated: true)
+            parentCoordinator?.removeChild(self)
             return
         }
     }
