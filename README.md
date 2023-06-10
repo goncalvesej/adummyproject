@@ -1,5 +1,4 @@
-# adummyproject
-A Dummy iOS Project
+# A Dummy iOS Project
 
 * MVVM-C
 * Swift 5
@@ -8,6 +7,7 @@ A Dummy iOS Project
 * SOLID principles
 
 Deps:
-https://github.com/goncalvesej/components
-https://github.com/goncalvesej/coordinator
 
+https://github.com/goncalvesej/components
+
+https://github.com/goncalvesej/coordinator
